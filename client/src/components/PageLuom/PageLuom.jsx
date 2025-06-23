@@ -22,7 +22,7 @@ const PageLuom = forwardRef((props, componentRef) => {
     //E.L. para guardar datos de paginacion de listado
     const[paginacion, setPaginacion]=useState('');
 
-    //TRAE LISTADO DE TITULARES
+    //TRAE LISTADO DE TITULARES--
     const searchListado = async(datos_escuela, page) =>{
         let data;
         let idEscuela;
