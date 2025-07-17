@@ -210,7 +210,38 @@ const Sidebar = ({contentRef}) => {
                 </div>
             </div> */}
             
+        {/**BOTON DEFINITIVO */}
+            <div className='flex items-center my-2'>
+                <button
+                className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
+                        ${(selectFiltroEscuela!='')
+                            ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                            :` bg-cyan-700 text-white border-cyan-700`
+                        }
+                        `}
+                >   
+                    <div className='flex flex-row justify-center'>
+                        <label className='mx-2 font-bold'>DEFINITIVO</label>
+                    </div>
+                </button>
+            </div>
 
+            {/**BOTON PROVISORIO */}
+            <div className='flex items-center my-2'>
+                <button
+                className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
+                        ${(selectFiltroEscuela!='')
+                            ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                            :` bg-cyan-700 text-white border-cyan-700`
+                        }
+                        `}
+                >
+                    <div className='flex flex-row justify-center'>
+                        <label className='mx-2 font-bold'>PROVISORIO</label>
+                        
+                    </div>
+                </button>
+            </div>
 
             {/**Boton */}
             <div className = 'flex items-center my-2 '>
