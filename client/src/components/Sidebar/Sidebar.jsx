@@ -190,7 +190,7 @@ const Sidebar = ({contentRef}) => {
   return (
     <div className='notranslate flex flex-col'>
         {/**MENU */}
-        <div className='flex flex-row align-center justify-end '>
+        <div className='flex flex-row align-center justify-between '>
             {/* <div className='flex desktop:flex-row movil:flex-col m-2 items-center justify-center w-[148mm] border-[1px] border-zinc-400 rounded-md py-2'>
                 <label className='text-xl font-semibold'>Buscar Escuela: </label>
                 <div className='flex flex-row'>
@@ -209,41 +209,44 @@ const Sidebar = ({contentRef}) => {
                     }
                 </div>
             </div> */}
-            
-        {/**BOTON DEFINITIVO */}
-            <div className='flex items-center my-2'>
-                <button
-                className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
-                        ${(selectFiltroEscuela!='')
-                            ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
-                            :` bg-cyan-700 text-white border-cyan-700`
-                        }
-                        `}
-                >   
-                    <div className='flex flex-row justify-center'>
-                        <label className='mx-2 font-bold'>DEFINITIVO</label>
-                    </div>
-                </button>
+
+            {/**BOTONES DE LOMS */}
+            <div className='flex flex-row'>
+                {/**BOTON DEFINITIVO */}
+                <div className='flex items-center my-2'>
+                    <button
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
+                            ${(selectFiltroEscuela!='')
+                                ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                                :` bg-cyan-700 text-white border-cyan-700`
+                            }
+                            `}
+                    >   
+                        <div className='flex flex-row justify-center'>
+                            <label className='mx-2 font-bold'>LOM DEFINITIVO</label>
+                        </div>
+                    </button>
+                </div>
+
+                {/**BOTON PROVISORIO */}
+                <div className='flex items-center my-2'>
+                    <button
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
+                            ${(selectFiltroEscuela!='')
+                                ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                                :` bg-cyan-700 text-white border-cyan-700`
+                            }
+                            `}
+                    >
+                        <div className='flex flex-row justify-center'>
+                            <label className='mx-2 font-bold'>LOM PROVISORIO</label>
+                            
+                        </div>
+                    </button>
+                </div>
             </div>
 
-            {/**BOTON PROVISORIO */}
-            <div className='flex items-center my-2'>
-                <button
-                className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
-                        ${(selectFiltroEscuela!='')
-                            ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
-                            :` bg-cyan-700 text-white border-cyan-700`
-                        }
-                        `}
-                >
-                    <div className='flex flex-row justify-center'>
-                        <label className='mx-2 font-bold'>PROVISORIO</label>
-                        
-                    </div>
-                </button>
-            </div>
-
-            {/**Boton */}
+            {/**Boton IMPRIMIR*/}
             <div className = 'flex items-center my-2 '>
                 <div className=' text-4xl align-center animate-bouncex text-sky-950'>
                     <ImArrowRight />
