@@ -18,6 +18,9 @@ const BuscadorEscuelasCombobox = ({
  //TRAER EL STORE GLOBAL DEL IDESCUELA
  const escuelaSG = useSelector((state)=>state.config.idEscuela);
 
+ //TRAE STORE GLOBAL DE TOKEN
+ //const tokenSG = useSelector((state)=>state.token);
+
   // Filtrar escuelas basado en el input
   useEffect(() => {
     if (inputValue.length > 0) {
@@ -34,6 +37,12 @@ const BuscadorEscuelasCombobox = ({
       setShowDropdown(false);
     }
   }, [inputValue, escuelas]);
+
+  //asignar a inputvalue si token tiene algun valor
+  // useEffect(()=>{
+  //   console.log('Se debe asignar el token');
+  //   setInputValue('60');
+  // },[tokenSG])
 
   // Cerrar dropdown al hacer clic fuera
   useEffect(() => {

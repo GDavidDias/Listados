@@ -7,9 +7,14 @@ import logoJujuy from '../../assets/logo-jujuy.jpeg';
 import Paginador from '../Paginador/Paginador';
 import fetchTitulares from '../../utils/fetchTitulares';
 import { setListado, setListadoCompleto } from '../../redux/configSlice';
+import { useParams } from 'react-router-dom';
+import fetchTitularesToken from '../../utils/fetchTitularesToken';
 
 
 const PageLuom = forwardRef((props, componentRef) => {
+
+    const { token } = useParams();
+    console.log('que token pasa: ', token);
 
     const dispatch = useDispatch();
 
@@ -37,8 +42,10 @@ const PageLuom = forwardRef((props, componentRef) => {
         //const page =1;
         const cargo='';
         const legajo = '';  
-        data = await fetchTitulares(idEscuela, page, cargo, legajo, limit);
-        //console.log('que trae data de fetchTitulares: ', data);
+
+        data = await fetchTitularesToken(token, page, cargo, legajo, limit);
+        //data = await fetchTitulares(idEscuela, page, cargo, legajo, limit);
+        console.log('que trae data de fetchTitularesToken: ', data);
 
         if(data && data.result?.length!=0){
             //setCurrentPage(1);
@@ -51,7 +58,7 @@ const PageLuom = forwardRef((props, componentRef) => {
         }
 
         //TAIGO LOS DAOTS COMPLETOS DEL LUOM PORESCUELA
-        const dataCompleto = await fetchTitulares(idEscuela, page, cargo, legajo, 999999);
+        const dataCompleto = await fetchTitularesToken(token, page, cargo, legajo, 999999);
         //console.log('que trae data completo: ', dataCompleto);
         if(dataCompleto && dataCompleto.result?.length!=0){
             dispatch(setListadoCompleto(dataCompleto.result));

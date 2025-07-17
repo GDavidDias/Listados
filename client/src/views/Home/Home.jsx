@@ -5,10 +5,25 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import PageLuom from '../../components/PageLuom/PageLuom'
 import Footer from '../Footer/Footer'
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../redux/configSlice'
 
 const Home = () => {
+    const dispatch = useDispatch();
+    const{token}=useParams();
+    //console.log('que tiene token : ', token);
     const[content, setContent]=useState(null);
     const contentRef = useRef(null);
+
+    // useEffect(()=>{
+    //   console.log('que tiene token:', token);
+    //   if(token!=''){
+    //     dispatch(setToken(token));
+    //   }else{
+    //     dispatch(setToken(''));
+    //   }
+    // },[token])
 
     useEffect(()=>{
       //Al renderizar uso el content de pagina principal de luom provisional

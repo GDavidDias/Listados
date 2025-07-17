@@ -5,7 +5,8 @@ import fetchTitulares from '../../utils/fetchTitulares';
 import { setIdEscuela, setListado, setListadoCompleto } from '../../redux/configSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchEscuelas from '../../utils/fetchEscuelas';
-import { data } from 'react-router-dom';
+import { data, useParams } from 'react-router-dom';
+import { ImArrowRight } from "react-icons/im";
 
 import { useReactToPrint } from "react-to-print";
 
@@ -17,11 +18,15 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
 //import BotonDescargaLUOM from '../BotonDescargaLUOM/BotonDescargaLUOM';
 
 //const Sidebar = () => {
-    const Sidebar = ({contentRef}) => {
+const Sidebar = ({contentRef}) => {
+    const {token} = useParams();
+    console.log('que tiene token en Sidebar:', token);
+
     const dispatch = useDispatch();
     //ESTADLOS GLOBALES
     const idEscuelaSG = useSelector((state)=>state.config.idEscuela);
     const listadoLuomSG= useSelector((state)=>state.config.listadoCompleto);
+    const tokenSG = useSelector((state)=>state.token);
 
     //ESTADOS LOCALES
     const[selectFiltroEscuela, setSelectFiltroEscuela]=useState('');
@@ -79,7 +84,7 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
     };
 
     /**----- FUNCIONALIDAD PARA DESCARCAR PDF */
-
+    
 
 
     /**--------------------------------------- */
@@ -98,10 +103,10 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
 
     //Busco y filtro la escuela
     const handleSelectEscuela =async(event)=>{
-        //console.log('que tiene event: ', event)
+        console.log('que tiene event: ', event)
         //const{value} = event.target;
-        const nombreEscSelect = event.nombre_escuela;
-        const idEscSelect = event.id_escuela;
+        //const nombreEscSelect = event.nombre_escuela;
+        const idEscSelect = event?.id_escuela;
         //console.log('que tiene nombreEscSelect: ', nombreEscSelect);
         //console.log('que tiene idEscSelect: ', idEscSelect);
         setSelectFiltroEscuela(event);
@@ -135,6 +140,14 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
         setFormatEscuelas(formated);
     };
 
+    const filterEscuelaToken = async(tokenEscuela)=>{
+        console.log('que tiene tokenEscuela: ', tokenEscuela);
+        const filterListadoEscuelas = listadoEscuelas;
+        const filterEscuela = await filterListadoEscuelas.filter(e=>e.token==tokenEscuela);
+        console.log('que tiene filterEscuela: ', filterEscuela);
+        handleSelectEscuela(filterEscuela[0]);
+    }
+
     useEffect(()=>{
         //se aplica filtro de seleccion especialidad
         //Se ejecuta para traer todaslas escuelas pero con paginacion
@@ -146,10 +159,22 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
 
     },[selectFiltroEscuela])
 
-    useEffect(()=>{
 
-        //console.log('que tiene listadoEscuelas:',listadoEscuelas);
+    useEffect(()=>{
+        // if(tokenSG && tokenSG!=''){
+        //     console.log('que tiene tokenSG en sidebar:', tokenSG);
+        //     filterEscuelaToken(tokenSG);
+        // }
+    },[tokenSG])
+
+    useEffect(()=>{
+        console.log('que tiene listadoEscuelas:',listadoEscuelas);
         formatearEscuelas();
+
+        console.log('que tiene tokenSG en sidebar:', tokenSG);
+        if(token && token!=''){
+            filterEscuelaToken(token);
+        }
     },[listadoEscuelas])
 
     useEffect(()=>{
@@ -165,8 +190,8 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
   return (
     <div className='notranslate flex flex-col'>
         {/**MENU */}
-        <div className='flex flex-row align-center '>
-            <div className='flex desktop:flex-row movil:flex-col m-2 items-center justify-center w-[148mm] border-[1px] border-zinc-400 rounded-md py-2'>
+        <div className='flex flex-row align-center justify-end '>
+            {/* <div className='flex desktop:flex-row movil:flex-col m-2 items-center justify-center w-[148mm] border-[1px] border-zinc-400 rounded-md py-2'>
                 <label className='text-xl font-semibold'>Buscar Escuela: </label>
                 <div className='flex flex-row'>
                     <BuscadorDinamicoCombobox
@@ -183,30 +208,40 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
                         >X</label>
                     }
                 </div>
-            </div>
+            </div> */}
+            
+
+
             {/**Boton */}
-            <div className = 'flex items-center'>
-                <button
-                    className={`ml-2 movil:mr-2 px-[2px] border-[1px] border-[#73685F] rounded shadow text-2xl w-[33px] h-[35px]
+            <div className = 'flex items-center my-2 '>
+                <div className=' text-4xl align-center animate-bouncex text-sky-950'>
+                    <ImArrowRight />
+                </div>
+                {/* <label 
+                    className={`desktop:flex movil:hidden ml-4 text-base 
                         ${(selectFiltroEscuela!='')
-                            ?`hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
-                            :`bg-gray-300 text-white border-gray-300`
+                            ?` text-black font-bold animate-bounce`
+                            :` text-white border-gray-300 `
+                        }
+                         `}
+                >Imprimir</label> */}
+                <button
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
+                        ${(selectFiltroEscuela!='')
+                            ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                            :` bg-cyan-700 text-white border-cyan-700`
                         }
                         `}
                     //disabled={selectFiltroEscuela === ''}
                     onClick={generaReporte}
-                ><MdPrint/></button>
+                >
+                    <div className='flex flex-row justify-center'>
+                        <label className='mx-2 font-bold'>IMPRIMIR</label>
+                        <div className='text-2xl'><MdPrint/></div>
+                    </div>
+                </button>
                 {/* ><GrDocumentPdf/></button> */}
-                <label 
-                    className={`desktop:flex movil:hidden ml-2 text-base 
-                        ${(selectFiltroEscuela!='')
-                            ?` text-black animate-bounce`
-                            :` text-white border-gray-300 `
-                        }
-                         `}
-                >Imprimir</label>
                 {/* <BotonDescargaLUOM datosEscuela={idEscuelaSG} datosLuom={listadoLuomSG} /> */}
-
             </div>
         </div>
 

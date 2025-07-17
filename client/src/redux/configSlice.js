@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     listado:[],
     listadoCompleto:[],
-    idEscuela:[]
+    idEscuela:[],
+    token:''
 };
 
 export const configSlice = createSlice({
@@ -18,9 +19,12 @@ export const configSlice = createSlice({
         },
         setIdEscuela:(state, action)=>{
             state.idEscuela = action.payload;
+        },
+        setToken:(state, action)=>{
+            state.token = action.payload;
         }
     }
 });
 
-export const {setListado, setIdEscuela, setListadoCompleto} = configSlice.actions;
+export const {setListado, setIdEscuela, setListadoCompleto, setToken} = configSlice.actions;
 export default configSlice.reducer;

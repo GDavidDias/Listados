@@ -6,7 +6,7 @@ module.exports = async(req, res)=>{
     console.log('Que tiene escuela: ', escuela);
 
     //TRAE TODOS LOS INSCRIPTOS
-    let armaquery = `SELECT e.id_escuela, e.numero, e.nombre_escuela, e.localidad, e.departamento, e.region, e.categoria, e.modalidad, e.zona, e.tipo_escuela
+    let armaquery = `SELECT e.id_escuela, e.numero, e.nombre_escuela, e.localidad, e.departamento, e.region, e.categoria, e.modalidad, e.zona, e.tipo_escuela, e.token
         FROM escuelas AS e `;
 
         if(escuela && escuela!=''){
