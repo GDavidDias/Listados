@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import fetchTitulares from '../../utils/fetchTitulares';
-import { setIdEscuela, setListado, setListadoCompleto } from '../../redux/configSlice';
+import { setIdEscuela, setListado, setListadoCompleto, setTipoLom } from '../../redux/configSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchEscuelas from '../../utils/fetchEscuelas';
 import { data, useParams } from 'react-router-dom';
@@ -20,13 +20,14 @@ import ReporteLuomInstitucional from '../ReporteLuomInstitucional/ReporteLuomIns
 //const Sidebar = () => {
 const Sidebar = ({contentRef}) => {
     const {token} = useParams();
-    console.log('que tiene token en Sidebar:', token);
+    //console.log('que tiene token en Sidebar:', token);
 
     const dispatch = useDispatch();
     //ESTADLOS GLOBALES
     const idEscuelaSG = useSelector((state)=>state.config.idEscuela);
     const listadoLuomSG= useSelector((state)=>state.config.listadoCompleto);
     const tokenSG = useSelector((state)=>state.token);
+    const tipoLomSG = useSelector((state)=>state.config.tipoLom);
 
     //ESTADOS LOCALES
     const[selectFiltroEscuela, setSelectFiltroEscuela]=useState('');
@@ -103,7 +104,7 @@ const Sidebar = ({contentRef}) => {
 
     //Busco y filtro la escuela
     const handleSelectEscuela =async(event)=>{
-        console.log('que tiene event: ', event)
+        //console.log('que tiene event: ', event)
         //const{value} = event.target;
         //const nombreEscSelect = event.nombre_escuela;
         const idEscSelect = event?.id_escuela;
@@ -141,12 +142,26 @@ const Sidebar = ({contentRef}) => {
     };
 
     const filterEscuelaToken = async(tokenEscuela)=>{
-        console.log('que tiene tokenEscuela: ', tokenEscuela);
+        //console.log('que tiene tokenEscuela: ', tokenEscuela);
         const filterListadoEscuelas = listadoEscuelas;
         const filterEscuela = await filterListadoEscuelas.filter(e=>e.token==tokenEscuela);
-        console.log('que tiene filterEscuela: ', filterEscuela);
+        //console.log('que tiene filterEscuela: ', filterEscuela);
         handleSelectEscuela(filterEscuela[0]);
     }
+
+    //!---  V1.1  ---
+    const cambiaDefinitivo =()=>{
+        console.log('Presiono boton LOM DEFINITIVO');
+        dispatch(setTipoLom(1));
+    };
+
+    const cambiaProvisorio =()=>{
+        console.log('Presiono boton LOM PROVISORIO');
+        dispatch(setTipoLom(2));
+    };
+
+
+    //!---------------
 
     useEffect(()=>{
         //se aplica filtro de seleccion especialidad
@@ -168,10 +183,10 @@ const Sidebar = ({contentRef}) => {
     },[tokenSG])
 
     useEffect(()=>{
-        console.log('que tiene listadoEscuelas:',listadoEscuelas);
+        //console.log('que tiene listadoEscuelas:',listadoEscuelas);
         formatearEscuelas();
 
-        console.log('que tiene tokenSG en sidebar:', tokenSG);
+        //console.log('que tiene tokenSG en sidebar:', tokenSG);
         if(token && token!=''){
             filterEscuelaToken(token);
         }
@@ -180,6 +195,10 @@ const Sidebar = ({contentRef}) => {
     useEffect(()=>{
         //console.log('que tiene formatEscuelas: ',formatEscuelas);
     },[formatEscuelas])
+
+    useEffect(()=>{
+        console.log('que tiene tipoLomSG: ', tipoLomSG);
+    },[tipoLomSG])
 
     //AL RENDERIZAR
     useEffect(()=>{
@@ -216,11 +235,12 @@ const Sidebar = ({contentRef}) => {
                 <div className='flex items-center my-2'>
                     <button
                     className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
-                            ${(selectFiltroEscuela!='')
-                                ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
-                                :` bg-cyan-700 text-white border-cyan-700`
+                            ${(tipoLomSG==1)
+                                ?` bg-blue-400 text-white`
+                                :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
                             }
                             `}
+                    onClick={cambiaDefinitivo}
                     >   
                         <div className='flex flex-row justify-center'>
                             <label className='mx-2 font-bold'>LOM DEFINITIVO</label>
@@ -232,11 +252,12 @@ const Sidebar = ({contentRef}) => {
                 <div className='flex items-center my-2'>
                     <button
                     className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
-                            ${(selectFiltroEscuela!='')
-                                ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
-                                :` bg-cyan-700 text-white border-cyan-700`
+                            ${(tipoLomSG==2)
+                                ?` bg-blue-400 text-white `
+                                :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
                             }
                             `}
+                    onClick={cambiaProvisorio}
                     >
                         <div className='flex flex-row justify-center'>
                             <label className='mx-2 font-bold'>LOM PROVISORIO</label>

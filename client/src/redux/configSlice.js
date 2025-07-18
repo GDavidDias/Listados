@@ -4,7 +4,8 @@ const initialState = {
     listado:[],
     listadoCompleto:[],
     idEscuela:[],
-    token:''
+    token:'',
+    tipoLom:1,
 };
 
 export const configSlice = createSlice({
@@ -22,9 +23,12 @@ export const configSlice = createSlice({
         },
         setToken:(state, action)=>{
             state.token = action.payload;
+        },
+        setTipoLom:(state, action)=>{
+            state.tipoLom = action.payload;
         }
     }
 });
 
-export const {setListado, setIdEscuela, setListadoCompleto, setToken} = configSlice.actions;
+export const {setListado, setIdEscuela, setListadoCompleto, setToken, setTipoLom} = configSlice.actions;
 export default configSlice.reducer;

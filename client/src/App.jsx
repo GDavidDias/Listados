@@ -8,7 +8,7 @@ import Home from './views/Home/Home'
 
 function App() {
   const{token}=useParams();
-  console.log('que tiene token: ', token);
+  //console.log('que tiene token: ', token);
   const [count, setCount] = useState(0)
 
   return (
