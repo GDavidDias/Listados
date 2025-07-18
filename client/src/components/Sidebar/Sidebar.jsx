@@ -232,12 +232,12 @@ const Sidebar = ({contentRef}) => {
             {/**BOTONES DE LOMS */}
             <div className='flex flex-row'>
                 {/**BOTON DEFINITIVO */}
-                <div className='flex items-center my-2'>
+                <div className='flex items-center my-2 '>
                     <button
                     className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
                             ${(tipoLomSG==1)
                                 ?` bg-blue-400 text-white`
-                                :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                                :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6] `
                             }
                             `}
                     onClick={cambiaDefinitivo}
