@@ -26,10 +26,10 @@ const Head = () => {
               <img className="desktop:w-[40px] desktop:h-[40px]" src={logo}/>
               <label className=' ml-2 movil:hidden w-[25vw] desktop:flex items-center justify-start text-lg font-semibold '>Sala Primaria - JPCD</label>
             </div>
-            {(tipoLomSG===1) && 
-              <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg '>LOM  <a className='text-red-500 px-2 animate-pulse'>DEFINITIVO</a> INSTITUCIONAL 2025</label>
+            {(tipoLomSG==='d') && 
+              <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg '>LOM  <a className='font-extrabold text-green-600 px-2 animate-pulse drop-shadow-[0_0_6px_rgba(255,255,255,0.8)]'>DEFINITIVO</a> INSTITUCIONAL 2025</label>
             }
-            {(tipoLomSG===2) && 
+            {(tipoLomSG==='p') && 
               <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg text-gray-500'>LOM PROVISORIO INSTITUCIONAL 2025</label>
             }
             

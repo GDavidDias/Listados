@@ -1,8 +1,11 @@
 import React from 'react';
 import logoJujuy from '../../assets/logo-jujuy.jpeg';
+import { useSelector } from 'react-redux';
 
 const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
 
+    //ESTADOS GLOBALES
+    const tipoLomSG = useSelector((state)=>state.config.tipoLom);
     //console.log('>> que ingresa por datosEscuela: ',  datosEscuela);
     //console.log('>> que ingresa por datosLuom: ', datosLuom);
 
@@ -30,7 +33,12 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
                                         </div>
                                         {/**TITULO */}
                                         <div className="w-[50%] flex justify-center font-bold text-2xl ">
-                                            <label>LOM INSTITUCIONAL 2025</label>
+                                            {(tipoLomSG==='d') &&
+                                                <label>LOM INSTITUCIONAL DEFINITIVO 2025</label>
+                                            }
+                                            {(tipoLomSG==='p') &&
+                                                <label>LOM INSTITUCIONAL PROVISORIO 2025</label>
+                                            }
                                         </div>
                                         {/**IMAGEN DERECHA */}
                                         <div className="w-[25%] flex justify-end">

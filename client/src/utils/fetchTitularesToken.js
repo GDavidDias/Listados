@@ -1,16 +1,18 @@
 import axios from 'axios';
 import { URL } from '../../varGlobal';
 
-const fetchTitularesToken = async(token, page, id_cargo, legajo, limit) => {
+const fetchTitularesToken = async(token, page, id_cargo, legajo, limit, tipoLom) => {
   console.log('como ingresa token: ',token);
   console.log('como ingresa page: ',page);
   console.log('como ingresa limit: ',limit);
+  console.log('como ingresa tipoLom: ',tipoLom);
 
   const dataBody = {
     "page":page,
     "cargo":'',
     "legajo":'',
     "limit":limit,
+    "tipoLom":tipoLom,
   };
 
   //console.log('que tiene datos que pasa a fechTitulares: ', dataBody);

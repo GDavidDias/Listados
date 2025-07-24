@@ -5,7 +5,7 @@ const initialState = {
     listadoCompleto:[],
     idEscuela:[],
     token:'',
-    tipoLom:1,
+    tipoLom:'p',
 };
 
 export const configSlice = createSlice({

@@ -152,12 +152,12 @@ const Sidebar = ({contentRef}) => {
     //!---  V1.1  ---
     const cambiaDefinitivo =()=>{
         console.log('Presiono boton LOM DEFINITIVO');
-        dispatch(setTipoLom(1));
+        dispatch(setTipoLom('d'));
     };
 
     const cambiaProvisorio =()=>{
         console.log('Presiono boton LOM PROVISORIO');
-        dispatch(setTipoLom(2));
+        dispatch(setTipoLom('p'));
     };
 
 
@@ -234,8 +234,8 @@ const Sidebar = ({contentRef}) => {
                 {/**BOTON DEFINITIVO */}
                 <div className='flex items-center my-2 '>
                     <button
-                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
-                            ${(tipoLomSG==1)
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700  text-white drop-shadow
+                            ${(tipoLomSG==='d')
                                 ?` bg-blue-400 text-white`
                                 :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6] `
                             }
@@ -251,8 +251,8 @@ const Sidebar = ({contentRef}) => {
                 {/**BOTON PROVISORIO */}
                 <div className='flex items-center my-2'>
                     <button
-                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
-                            ${(tipoLomSG==2)
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700  text-white drop-shadow
+                            ${(tipoLomSG==='p')
                                 ?` bg-blue-400 text-white `
                                 :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
                             }
@@ -281,7 +281,7 @@ const Sidebar = ({contentRef}) => {
                          `}
                 >Imprimir</label> */}
                 <button
-                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white drop-shadow
                         ${(selectFiltroEscuela!='')
                             ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
                             :` bg-cyan-700 text-white border-cyan-700`

@@ -22,13 +22,15 @@ const PageLuom = forwardRef((props, componentRef) => {
 
     const listadoSG = useSelector((state)=>state.config.listado);
 
+    const tipoLomSG = useSelector((state)=>state.config.tipoLom);
+
     //E.L. guarda la pagina actual de listado
     const[currentPage, setCurrentPage]=useState(1);
     //E.L. para guardar datos de paginacion de listado
     const[paginacion, setPaginacion]=useState('');
 
     //TRAE LISTADO DE TITULARES--
-    const searchListado = async(datos_escuela, page) =>{
+    const searchListado = async(datos_escuela, page, tipolom) =>{
         let data;
         let idEscuela;
         //console.log('que ingresa id_escuela: ', datos_escuela);
@@ -43,7 +45,7 @@ const PageLuom = forwardRef((props, componentRef) => {
         const cargo='';
         const legajo = '';  
 
-        data = await fetchTitularesToken(token, page, cargo, legajo, limit);
+        data = await fetchTitularesToken(token, page, cargo, legajo, limit, tipolom);
         //data = await fetchTitulares(idEscuela, page, cargo, legajo, limit);
         console.log('que trae data de fetchTitularesToken: ', data);
 
@@ -58,7 +60,7 @@ const PageLuom = forwardRef((props, componentRef) => {
         }
 
         //TAIGO LOS DAOTS COMPLETOS DEL LUOM PORESCUELA
-        const dataCompleto = await fetchTitularesToken(token, page, cargo, legajo, 999999);
+        const dataCompleto = await fetchTitularesToken(token, page, cargo, legajo, 999999, tipolom);
         //console.log('que trae data completo: ', dataCompleto);
         if(dataCompleto && dataCompleto.result?.length!=0){
             dispatch(setListadoCompleto(dataCompleto.result));
@@ -77,11 +79,16 @@ const PageLuom = forwardRef((props, componentRef) => {
     useEffect(()=>{
         //console.log('que trae listadoSG: ', listadoSG);
     },[listadoSG]);
+    
+    useEffect(()=>{
+        console.log('que tiene tipoLomSG: ',tipoLomSG);
+        searchListado(idEscuelaSG[0], currentPage, tipoLomSG)
+    },[tipoLomSG])
 
     useEffect(()=>{
         console.log('>>que tiene idEscuelaSG: ', idEscuelaSG);
         setCurrentPage(1);
-        searchListado(idEscuelaSG[0],currentPage);
+        searchListado(idEscuelaSG[0], currentPage, tipoLomSG);
 
         // if(idEscuelaSG.length!=0){
         //     searchListado(idEscuelaSG[0],currentPage);
@@ -89,13 +96,13 @@ const PageLuom = forwardRef((props, componentRef) => {
         //     searchListado([])
         //     setCurrentPage(1);
         // }
-    },[idEscuelaSG]);
+    },[idEscuelaSG],[tipoLomSG]);
     
     useEffect(()=>{
         //console.log('que tiene currentPage: ', currentPage);
-        searchListado(idEscuelaSG[0],currentPage)
+        searchListado(idEscuelaSG[0], currentPage, tipoLomSG)
 
-    },[currentPage])
+    },[currentPage],[tipoLomSG])
 
 
   return (
