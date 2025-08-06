@@ -16,29 +16,13 @@ module.exports = async(req, res)=>{
     const offset = (page-1)*limit;
 
     //TRAE TODOS LOS INSCRIPTOS
-    let armaquery = `SELECT t.legajo, t.dni, t.nombre, t.fecha_ingreso, t.id_cargo, t.orden, esp.abreviatura, t.id_escuela, e.numero AS Nro_Escuela, e.token, c.año, c.puntaje_anterior, c.item_a, c.item_b, c.item_c, c.item_d, c.item_e, c.item_f, (c.puntaje_anterior + c.item_a + c.item_b + c.item_c + c.item_d + c.item_e + c.item_f) as total, c.tipo_lom
-        FROM titulares AS t 
-        LEFT JOIN escuelas AS e ON t.id_escuela = e.id_escuela 
-        LEFT JOIN calificacion AS c ON t.legajo = c.legajo
-        LEFT JOIN especialidad AS esp ON t.id_cargo = esp.id_especialidad
-        WHERE c.activo = 1
+    let armaquery = `SELECT t.id_titulares, t.legajo, t.dni, t.nombre, t.fecha_ingreso, t.id_cargo, t.orden, esp.abreviatura, t.id_escuela, e.numero AS Nro_Escuela, e.token, c.año, c.puntaje_anterior, c.item_a, c.item_b, c.item_c, c.item_d, c.item_e, c.item_f, (c.puntaje_anterior + c.item_a + c.item_b + c.item_c + c.item_d + c.item_e + c.item_f) as total, c.tipo_lom 
+        FROM titulares AS t
+        INNER JOIN escuelas AS e ON t.id_escuela = e.id_escuela AND e.token = "${token}"
+        LEFT JOIN especialidad AS esp ON t.id_cargo = esp.id_especialidad 
+        INNER JOIN calificacion AS c ON t.legajo = c.legajo AND c.tipo_lom = "${tipoLom}" AND c.activo = 1 
+        WHERE t.tipo_lom = "${tipoLom}" 
         `;
-
-        if(token && token!=' '){
-            armaquery += ` AND e.token = "${token}" `
-        }
-
-        if(cargo && cargo!=''){
-            armaquery += ` AND t.cargo = ${cargo} `
-        }
-
-        if(legajo && legajo!=''){
-            armaquery += ` AND t.legajo = ${legajo} `
-        }
-
-        if(tipoLom && tipoLom!=''){
-            armaquery += ` AND c.tipo_lom = "${tipoLom}"  `
-        }
 
         armaquery += `ORDER BY t.orden ASC  `;
 

@@ -14,7 +14,7 @@ import fetchTitularesToken from '../../utils/fetchTitularesToken';
 const PageLuom = forwardRef((props, componentRef) => {
 
     const { token } = useParams();
-    console.log('que token pasa: ', token);
+    //console.log('que token pasa: ', token);
 
     const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ const PageLuom = forwardRef((props, componentRef) => {
 
         data = await fetchTitularesToken(token, page, cargo, legajo, limit, tipolom);
         //data = await fetchTitulares(idEscuela, page, cargo, legajo, limit);
-        console.log('que trae data de fetchTitularesToken: ', data);
+        //console.log('que trae data de fetchTitularesToken: ', data);
 
         if(data && data.result?.length!=0){
             //setCurrentPage(1);
@@ -81,12 +81,12 @@ const PageLuom = forwardRef((props, componentRef) => {
     },[listadoSG]);
     
     useEffect(()=>{
-        console.log('que tiene tipoLomSG: ',tipoLomSG);
-        searchListado(idEscuelaSG[0], currentPage, tipoLomSG)
+        //console.log('que tiene tipoLomSG: ',tipoLomSG);
+        searchListado(idEscuelaSG[0], currentPage, tipoLomSG);
     },[tipoLomSG])
 
     useEffect(()=>{
-        console.log('>>que tiene idEscuelaSG: ', idEscuelaSG);
+        //console.log('>>que tiene idEscuelaSG: ', idEscuelaSG);
         setCurrentPage(1);
         searchListado(idEscuelaSG[0], currentPage, tipoLomSG);
 
@@ -96,7 +96,7 @@ const PageLuom = forwardRef((props, componentRef) => {
         //     searchListado([])
         //     setCurrentPage(1);
         // }
-    },[idEscuelaSG],[tipoLomSG]);
+    },[idEscuelaSG]);
     
     useEffect(()=>{
         //console.log('que tiene currentPage: ', currentPage);
@@ -175,9 +175,22 @@ const PageLuom = forwardRef((props, componentRef) => {
                                     }
                                 `}
                 >
+                    {(tipoLomSG==='p') &&
+                        <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0">
+                            <span className="text-6xl font-bold text-gray-500 opacity-50 rotate-[-30deg] select-none font-stretch-extra-expanded">
+                            LOM PROVISORIO
+                            </span>
+                            <span className="text-6xl font-bold text-gray-500 opacity-50 rotate-[-30deg] select-none font-stretch-extra-expanded">
+                            LOM PROVISORIO
+                            </span>
+                            <span className="text-6xl font-bold text-gray-500 opacity-50 rotate-[-30deg] select-none font-stretch-extra-expanded">
+                            LOM PROVISORIO
+                            </span>
+                        </div>
+                    }
                     <table>
                         <thead>
-                            <tr className='sticky top-0 bg-zinc-200 border-b-[1px]  border-zinc-400 print:bg-zinc-200 print:force-color desktop:text-[10px] desktop-md:text-sm'>
+                            <tr className='relative sticky top-0 bg-zinc-200 border-b-[1px]  border-zinc-400 print:bg-zinc-200 print:force-color desktop:text-[10px] desktop-md:text-sm '>
                                 <th className='border-[1px] border-zinc-600 w-[5vw] '>LEGAJO</th>
                                 <th className='border-[1px] border-zinc-600 w-[7vw]'>DNI</th>
                                 <th className='border-[1px] border-zinc-600 w-[25vw]'>NOMBRE</th>
@@ -226,7 +239,7 @@ const PageLuom = forwardRef((props, componentRef) => {
                             {
                                 listadoSG?.map((docente, index)=>{
                                     return(
-                                        <tr key={index} className='desktop-md:text-base desktop:text-xs'>
+                                        <tr key={index} className='desktop-md:text-base desktop:text-xs hover:bg-orange-300'>
                                             <td className='border-[1px] border-b-[1px] border-zinc-400 w-[5vw] h-[4vh] text-center'>{docente.legajo}</td>
                                             <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[7vw] text-center'>{docente.dni}</td>
                                             <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[25vw] pl-2'>{docente.nombre}</td>

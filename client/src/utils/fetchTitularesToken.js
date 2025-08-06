@@ -2,10 +2,10 @@ import axios from 'axios';
 import { URL } from '../../varGlobal';
 
 const fetchTitularesToken = async(token, page, id_cargo, legajo, limit, tipoLom) => {
-  console.log('como ingresa token: ',token);
-  console.log('como ingresa page: ',page);
-  console.log('como ingresa limit: ',limit);
-  console.log('como ingresa tipoLom: ',tipoLom);
+  //console.log('como ingresa token: ',token);
+  //console.log('como ingresa page: ',page);
+  //console.log('como ingresa limit: ',limit);
+  //console.log('como ingresa tipoLom: ',tipoLom);
 
   const dataBody = {
     "page":page,
@@ -19,7 +19,7 @@ const fetchTitularesToken = async(token, page, id_cargo, legajo, limit, tipoLom)
 
   try{
       const {data} = await axios.post(`${URL}/api/lomtoken/${token}`,dataBody);
-      console.log('que trae data de fechAllTitularesToken: ', data);
+      //console.log('que trae data de fechAllTitularesToken: ', data);
       return data;
   }catch(error){
     console.log('error en fechAllTitularesToken: ', error);

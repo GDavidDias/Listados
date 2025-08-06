@@ -151,12 +151,12 @@ const Sidebar = ({contentRef}) => {
 
     //!---  V1.1  ---
     const cambiaDefinitivo =()=>{
-        console.log('Presiono boton LOM DEFINITIVO');
+        //console.log('Presiono boton LOM DEFINITIVO');
         dispatch(setTipoLom('d'));
     };
 
     const cambiaProvisorio =()=>{
-        console.log('Presiono boton LOM PROVISORIO');
+        //console.log('Presiono boton LOM PROVISORIO');
         dispatch(setTipoLom('p'));
     };
 
@@ -197,7 +197,7 @@ const Sidebar = ({contentRef}) => {
     },[formatEscuelas])
 
     useEffect(()=>{
-        console.log('que tiene tipoLomSG: ', tipoLomSG);
+        //console.log('que tiene tipoLomSG: ', tipoLomSG);
     },[tipoLomSG])
 
     //AL RENDERIZAR
@@ -234,7 +234,7 @@ const Sidebar = ({contentRef}) => {
                 {/**BOTON DEFINITIVO */}
                 <div className='flex items-center my-2 '>
                     <button
-                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700  text-white drop-shadow
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700  text-white drop-shadow cursor-pointer
                             ${(tipoLomSG==='d')
                                 ?` bg-blue-400 text-white`
                                 :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6] `
@@ -243,7 +243,7 @@ const Sidebar = ({contentRef}) => {
                     onClick={cambiaDefinitivo}
                     >   
                         <div className='flex flex-row justify-center'>
-                            <label className='mx-2 font-bold'>LOM DEFINITIVO</label>
+                            <label className='mx-2 font-bold cursor-pointer animate-pulse drop-shadow-[0_0_5px_rgba(255,255,255,0.9)]'>LOM DEFINITIVO</label>
                         </div>
                     </button>
                 </div>
@@ -251,7 +251,7 @@ const Sidebar = ({contentRef}) => {
                 {/**BOTON PROVISORIO */}
                 <div className='flex items-center my-2'>
                     <button
-                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700  text-white drop-shadow
+                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[160px] h-[35px]  border-cyan-700  text-white drop-shadow cursor-pointer
                             ${(tipoLomSG==='p')
                                 ?` bg-blue-400 text-white `
                                 :` bg-cyan-700 text-white border-cyan-700 hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
@@ -260,7 +260,7 @@ const Sidebar = ({contentRef}) => {
                     onClick={cambiaProvisorio}
                     >
                         <div className='flex flex-row justify-center'>
-                            <label className='mx-2 font-bold'>LOM PROVISORIO</label>
+                            <label className='mx-2 font-bold cursor-pointer'>LOM PROVISORIO</label>
                             
                         </div>
                     </button>
@@ -268,36 +268,36 @@ const Sidebar = ({contentRef}) => {
             </div>
 
             {/**Boton IMPRIMIR*/}
-            <div className = 'flex items-center my-2 '>
-                <div className=' text-4xl align-center animate-bouncex text-sky-950'>
-                    <ImArrowRight />
-                </div>
-                {/* <label 
-                    className={`desktop:flex movil:hidden ml-4 text-base 
-                        ${(selectFiltroEscuela!='')
-                            ?` text-black font-bold animate-bounce`
-                            :` text-white border-gray-300 `
-                        }
-                         `}
-                >Imprimir</label> */}
-                <button
-                    className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white drop-shadow
-                        ${(selectFiltroEscuela!='')
-                            ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
-                            :` bg-cyan-700 text-white border-cyan-700`
-                        }
-                        `}
-                    //disabled={selectFiltroEscuela === ''}
-                    onClick={generaReporte}
-                >
-                    <div className='flex flex-row justify-center'>
-                        <label className='mx-2 font-bold'>IMPRIMIR</label>
-                        <div className='text-2xl'><MdPrint/></div>
+            {(tipoLomSG==='d') &&
+                <div className = 'flex items-center my-2 '>
+                    <div className=' text-4xl align-center animate-bouncex text-sky-950'>
+                        <ImArrowRight />
                     </div>
-                </button>
-                {/* ><GrDocumentPdf/></button> */}
-                {/* <BotonDescargaLUOM datosEscuela={idEscuelaSG} datosLuom={listadoLuomSG} /> */}
-            </div>
+                    <button
+                        className={`ml-2 desktop:mr-8 movil:mr-2 px-[2px] border-[1px] rounded shadow w-[140px] h-[35px]  border-cyan-700 bg-cyan-700 text-white drop-shadow cursor-pointer
+                            ${(selectFiltroEscuela!='')
+                                ?` hover:bg-[#7C8EA6] hover:text-white hover:border-[#7C8EA6]`
+                                :` bg-cyan-700 text-white border-cyan-700`
+                            }
+                            `}
+                        onClick={generaReporte}
+                    >
+                        <div className='flex flex-row justify-center'>
+                            <label className='mx-2 font-bold cursor-pointer'>IMPRIMIR</label>
+                            <div className='text-2xl'><MdPrint/></div>
+                        </div>
+                    </button>
+                </div>
+            }
+            {(tipoLomSG=='p') &&
+                <div className = 'flex items-center my-2 '>
+                    <div className='animate-bounce'>
+                        <p className='font-extrabold text-red-500 text-xl mr-4'>SOLO SE PUEDE IMPRIMIR EL LOM DEFINITIVO</p>
+                    </div>
+                    
+                </div>
+            }
+
         </div>
 
     <div ref={contentRef} className='hidden print:block'>
