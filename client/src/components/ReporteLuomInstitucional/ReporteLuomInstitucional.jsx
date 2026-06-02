@@ -6,8 +6,8 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
 
     //ESTADOS GLOBALES
     const tipoLomSG = useSelector((state)=>state.config.tipoLom);
-    //console.log('>> que ingresa por datosEscuela: ',  datosEscuela);
-    //console.log('>> que ingresa por datosLuom: ', datosLuom);
+    console.log('>> que ingresa por datosEscuela: ',  datosEscuela);
+    console.log('>> que ingresa por datosLuom: ', datosLuom);
 
   return (
     <div className='notranslate w-full h-full p-2  '>
@@ -34,10 +34,10 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
                                         {/**TITULO */}
                                         <div className="w-[50%] flex justify-center font-bold text-2xl ">
                                             {(tipoLomSG==='d') &&
-                                                <label>LOM INSTITUCIONAL DEFINITIVO 2025</label>
+                                                <label>LOM INSTITUCIONAL DEFINITIVO 2026</label>
                                             }
                                             {(tipoLomSG==='p') &&
-                                                <label>LOM INSTITUCIONAL PROVISORIO 2025</label>
+                                                <label>LOM INSTITUCIONAL PROVISORIO 2026</label>
                                             }
                                         </div>
                                         {/**IMAGEN DERECHA */}
@@ -131,7 +131,7 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
                                 </div>
                             </th>
                             <th className='border-[1px] border-zinc-400 w-[5vw]'>TOTAL</th>
-                            <th className='border-[1px]  border-zinc-400 w-[10vw]'>NOTIFICADO</th>
+                            {/* <th className='border-[1px]  border-zinc-400 w-[10vw]'>NOTIFICADO</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -152,7 +152,7 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
                                         <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[5vw] text-center'>{docente.item_e}</td>
                                         <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[5vw] text-center'>{docente.item_f}</td>
                                         <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[5vw] text-center font-bold'>{docente.total}</td>
-                                        <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[10vw] text-center'>{}</td>
+                                        {/* <td className='border-r-[1px] border-b-[1px] border-zinc-400 w-[10vw] text-center'>{}</td> */}
                                     </tr>
                                 )
                             })

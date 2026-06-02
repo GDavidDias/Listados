@@ -27,13 +27,13 @@ const Head = () => {
               <label className=' ml-2 movil:hidden w-[25vw] desktop:flex items-center justify-start text-lg font-semibold '>Sala Primaria - JPCD</label>
             </div>
             {(tipoLomSG==='d') && 
-              <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg '>LOM INSTITUCIONAL <a className='font-extrabold text-green-600 px-2 animate-pulse drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]'>DEFINITIVO</a> 2025</label>
+              <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg '>LOM INSTITUCIONAL <a className='font-extrabold text-green-600 px-2 animate-pulse drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]'>DEFINITIVO</a> 2026</label>
             }
             {(tipoLomSG==='p') && 
-              <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg text-gray-500'>LOM INSTITUCIONAL PROVISORIO 2025</label>
+              <label className='desktop:w-[50vw] movil:w-full flex items-center justify-center font-bold desktop-md:text-2xl desktop:text-lg text-gray-500'>LOM INSTITUCIONAL PROVISORIO 2026</label>
             }
             
-            <label className='movil:hidden desktop:flex w-[20vw] flex items-center justify-end font-bold text-base pr-4'>V 1.1</label>
+            <label className='movil:hidden desktop:flex w-[20vw] flex items-center justify-end font-bold text-base pr-4'>V 1.2</label>
         </div>
     </div>
   )

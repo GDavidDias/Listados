@@ -35,7 +35,7 @@ const PageLuom = forwardRef((props, componentRef) => {
         let idEscuela;
         //console.log('que ingresa id_escuela: ', datos_escuela);
         if(datos_escuela){
-            idEscuela=datos_escuela.id_escuela 
+            idEscuela=datos_escuela.id_escuela;
         }else{
             idEscuela="";
         }
@@ -45,9 +45,10 @@ const PageLuom = forwardRef((props, componentRef) => {
         const cargo='';
         const legajo = '';  
 
-        data = await fetchTitularesToken(token, page, cargo, legajo, limit, tipolom);
-        //data = await fetchTitulares(idEscuela, page, cargo, legajo, limit);
-        //console.log('que trae data de fetchTitularesToken: ', data);
+        //data = await fetchTitularesToken(token, page, cargo, legajo, limit, tipolom);
+        //data = await fetchTitularesToken(idEscuela, page, cargo, legajo, limit, tipolom);
+        data = await fetchTitulares(idEscuela, page, cargo, legajo, limit, tipolom);
+        console.log('que trae data de fetchTitulares: ', data);
 
         if(data && data.result?.length!=0){
             //setCurrentPage(1);
@@ -60,7 +61,8 @@ const PageLuom = forwardRef((props, componentRef) => {
         }
 
         //TAIGO LOS DAOTS COMPLETOS DEL LUOM PORESCUELA
-        const dataCompleto = await fetchTitularesToken(token, page, cargo, legajo, 999999, tipolom);
+        //const dataCompleto = await fetchTitularesToken(token, page, cargo, legajo, 999999, tipolom);
+        const dataCompleto = await fetchTitulares(idEscuela, page, cargo, legajo, 999999, tipolom);
         //console.log('que trae data completo: ', dataCompleto);
         if(dataCompleto && dataCompleto.result?.length!=0){
             dispatch(setListadoCompleto(dataCompleto.result));
@@ -82,11 +84,16 @@ const PageLuom = forwardRef((props, componentRef) => {
     
     useEffect(()=>{
         //console.log('que tiene tipoLomSG: ',tipoLomSG);
-        searchListado(idEscuelaSG[0], currentPage, tipoLomSG);
+        //searchListado(idEscuelaSG[0], currentPage, tipoLomSG);
     },[tipoLomSG])
 
     useEffect(()=>{
-        //console.log('>>que tiene idEscuelaSG: ', idEscuelaSG);
+
+        if(!idEscuelaSG || idEscuelaSG.length === 0 || idEscuelaSG == ''){
+            return;
+        };
+
+        console.log('>>que tiene idEscuelaSG: ', idEscuelaSG);
         setCurrentPage(1);
         searchListado(idEscuelaSG[0], currentPage, tipoLomSG);
 
@@ -100,6 +107,10 @@ const PageLuom = forwardRef((props, componentRef) => {
     
     useEffect(()=>{
         //console.log('que tiene currentPage: ', currentPage);
+        if(!idEscuelaSG || idEscuelaSG.length === 0 || idEscuelaSG == ''){
+            return;
+        };
+        
         searchListado(idEscuelaSG[0], currentPage, tipoLomSG)
 
     },[currentPage],[tipoLomSG])
@@ -175,8 +186,10 @@ const PageLuom = forwardRef((props, componentRef) => {
                                     }
                                 `}
                 >
+                    {/**MARCA DE AGUA DE LOM PROVISORIO (HABILITAR CUANDO SALGA EL DEFINITIVO) */}
                     {(tipoLomSG==='p') &&
                         <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0">
+                            {/**
                             <span className="text-6xl font-bold text-gray-500 opacity-50 rotate-[-30deg] select-none font-stretch-extra-expanded">
                             LOM PROVISORIO
                             </span>
@@ -186,6 +199,8 @@ const PageLuom = forwardRef((props, componentRef) => {
                             <span className="text-6xl font-bold text-gray-500 opacity-50 rotate-[-30deg] select-none font-stretch-extra-expanded">
                             LOM PROVISORIO
                             </span>
+                             */}
+
                         </div>
                     }
                     <table>

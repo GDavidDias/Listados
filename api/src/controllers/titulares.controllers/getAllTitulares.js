@@ -2,12 +2,13 @@ const pool = require('../../database/connection.js');
 
 module.exports = async(req, res)=>{
     console.log('ingresa a getAllTitulares ');
-    const{escuela, page, cargo, legajo, limit} = req.body;
+    const{escuela, page, cargo, legajo, limit, tipoLom} = req.body;
     console.log('Que tiene escuela: ', escuela);
     console.log('Que tiene cargo: ', cargo);
     console.log('Que tiene legajo: ', legajo);
     console.log('que trae limit: ', limit);
     console.log('que trae page: ', page);
+    console.log('que trae tipoLom: ', tipoLom);
 
     const offset = (page-1)*limit;
 
@@ -15,7 +16,7 @@ module.exports = async(req, res)=>{
     let armaquery = `SELECT t.legajo, t.dni, t.nombre, t.fecha_ingreso, t.id_cargo, t.orden, esp.abreviatura, t.id_escuela, e.numero AS Nro_Escuela, c.año, c.puntaje_anterior, c.item_a, c.item_b, c.item_c, c.item_d, c.item_e, c.item_f, (c.puntaje_anterior + c.item_a + c.item_b + c.item_c + c.item_d + c.item_e + c.item_f) as total
         FROM titulares AS t 
         LEFT JOIN escuelas AS e ON t.id_escuela = e.id_escuela 
-        LEFT JOIN calificacion AS c ON t.legajo = c.legajo
+        LEFT JOIN calificacion AS c ON t.legajo = c.legajo and t.tipo_lom = c.tipo_lom
         LEFT JOIN especialidad AS esp ON t.id_cargo = esp.id_especialidad
         WHERE c.activo = 1
         `;
@@ -30,6 +31,10 @@ module.exports = async(req, res)=>{
 
         if(legajo && legajo!=''){
             armaquery += ` AND t.legajo = ${legajo} `
+        }
+
+        if(tipoLom && tipoLom!=''){
+            armaquery += ` AND t.tipo_lom = '${tipoLom}' `
         }
 
         armaquery += `ORDER BY t.orden ASC  `;

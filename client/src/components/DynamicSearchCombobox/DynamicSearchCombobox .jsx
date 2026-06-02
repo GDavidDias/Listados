@@ -5,7 +5,7 @@ const DynamicSearchCombobox = ({
   placeholder = "Buscar...", 
   onSelect,
   noResultsText = "No se encontraron resultados",
-  className = ""
+  className = "w-[50px]"
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [filteredItems, setFilteredItems] = useState([]);
@@ -88,7 +88,7 @@ const DynamicSearchCombobox = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="w-full px-1 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         aria-haspopup="listbox"
         aria-expanded={showDropdown}
         onClick={() => setShowDropdown(true)}

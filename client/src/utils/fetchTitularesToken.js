@@ -15,7 +15,7 @@ const fetchTitularesToken = async(token, page, id_cargo, legajo, limit, tipoLom)
     "tipoLom":tipoLom,
   };
 
-  //console.log('que tiene datos que pasa a fechTitulares: ', dataBody);
+  console.log('que tiene datos que pasa a fetchTitularesToken: ', dataBody);
 
   try{
       const {data} = await axios.post(`${URL}/api/lomtoken/${token}`,dataBody);

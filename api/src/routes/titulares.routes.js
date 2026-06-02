@@ -5,6 +5,7 @@ const {
     getTitular,
     getDatosTitulares,
     getAllTitularesToken,
+    getAllDni
 } = require('../controllers/titulares.controllers');
 
 const router = Router();
@@ -20,5 +21,8 @@ router.post('/datostitular', getDatosTitulares);
 
 //trae listado de titulares por TOKEN 
 router.post('/lomtoken/:token', getAllTitularesToken);
+
+//trae listado de titulares por DNI
+router.post('/buscarDNI', getAllDni);
 
 module.exports = router;

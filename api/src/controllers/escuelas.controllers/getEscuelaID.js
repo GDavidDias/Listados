@@ -11,7 +11,7 @@ module.exports = async(req, res)=>{
 
         if(escuela && escuela!=''){
             //armaquery += ` WHERE e.numero LIKE '${escuela}%' `
-            armaquery += ` WHERE e.numero LIKE '${escuela}%' `
+            armaquery += ` WHERE e.id_escuela LIKE '${escuela}%' `
         }
 
         armaquery += ` ORDER BY e.numero ASC LIMIT 10`;
