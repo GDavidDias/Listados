@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const titularesRoutes = require('./src/routes/titulares.routes.js');
 const escuelasRoutes = require('./src/routes/escuelas.routes.js');
+const configuracionRoutes = require('./src/routes/configuracion.routes.js');
 
 const app = express();
 
@@ -53,6 +54,8 @@ const server = http.createServer(app);
     //Rutas de Mmdulo Escuelas
     app.use('/api', escuelasRoutes);
 
+    //Rutas de Mmdulo Configuracion
+    app.use('/api', configuracionRoutes);
 
 //server.listen(3001,()=>{console.log("Server Socket is Running")})
 
