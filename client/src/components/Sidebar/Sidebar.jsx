@@ -2,13 +2,15 @@ import React, { useRef } from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import fetchTitulares from '../../utils/fetchTitulares';
-import { setIdEscuela, setListado, setListadoCompleto, setTipoLom } from '../../redux/configSlice';
+import { setIdEscuela, setListado, setListadoCompleto, setTipoLom, setNivel} from '../../redux/configSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchEscuelas from '../../utils/fetchEscuelas';
 import fetchEscuelaID from '../../utils/fetchEscuelaID';
 import fetchDNI from '../../utils/fetchDNI';
 import { data, useParams } from 'react-router-dom';
 import { ImArrowRight } from "react-icons/im";
+import axios from 'axios';
+import { URL } from '../../../varGlobal';
 
 import { useReactToPrint } from "react-to-print";
 
@@ -30,6 +32,7 @@ const Sidebar = ({contentRef}) => {
     const listadoLuomSG= useSelector((state)=>state.config.listadoCompleto);
     const tokenSG = useSelector((state)=>state.token);
     const tipoLomSG = useSelector((state)=>state.config.tipoLom);
+    const nivelSG = useSelector((state)=>state.config.nivel);
 
     //ESTADOS LOCALES
 
@@ -275,6 +278,14 @@ const [imprimirPendiente, setImprimirPendiente] = useState(false);
         }
     };
 
+    const traeConfiguracionNivel = async()=>{
+        console.log('ingresa a traeConfiguracionNivel');
+        const dataNivel = await axios.get(`${URL}/api/configuracionnivel`);
+        console.log('que trae dataNivel:',dataNivel.data[0]);
+        
+        dispatch(setNivel(dataNivel.data[0]?.nivel));
+    }
+
     //!---------------
 
     useEffect(()=>{
@@ -319,21 +330,19 @@ const [imprimirPendiente, setImprimirPendiente] = useState(false);
 
     //AL RENDERIZAR
     useEffect(()=>{
-        //LLAMO A PROCEDIMIENTOS INICIALES
-        //traeEscuelas();
+        //LLAMO A PROCEDIMIENTO PARA TRAER CONFIGURACION DE NIVEL
+        traeConfiguracionNivel();
+
     },[])
 
     useEffect(()=>{
-
         if(!imprimirPendiente) return;
         
         const imprimir = async()=>{
             await handlePrintPdf();
             setImprimirPendiente(false);
         };
-
         imprimir();
-
     },[imprimirPendiente]);
 
 

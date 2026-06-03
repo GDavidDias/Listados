@@ -6,6 +6,7 @@ const initialState = {
     idEscuela:[],
     token:'',
     tipoLom:'p',
+    nivel:''
 };
 
 export const configSlice = createSlice({
@@ -26,9 +27,12 @@ export const configSlice = createSlice({
         },
         setTipoLom:(state, action)=>{
             state.tipoLom = action.payload;
+        },
+        setNivel:(state, action)=>{
+            state.nivel = action.payload;
         }
     }
 });
 
-export const {setListado, setIdEscuela, setListadoCompleto, setToken, setTipoLom} = configSlice.actions;
+export const {setListado, setIdEscuela, setListadoCompleto, setToken, setTipoLom, setNivel} = configSlice.actions;
 export default configSlice.reducer;

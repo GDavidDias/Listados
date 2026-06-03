@@ -6,6 +6,8 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
 
     //ESTADOS GLOBALES
     const tipoLomSG = useSelector((state)=>state.config.tipoLom);
+    const nivelSG = useSelector((state)=>state.config.nivel);
+    
     console.log('>> que ingresa por datosEscuela: ',  datosEscuela);
     console.log('>> que ingresa por datosLuom: ', datosLuom);
 
@@ -45,7 +47,7 @@ const ReporteLuomInstitucional = ({datosEscuela, datosLuom,contentRef}) => {
                                             {/* <img src=''/> */}
                                             <div className='flex flex-col items-center mr-2 '>
                                                 <label className='text-xs '>JUNTA PROVINCIAL DE CALIFICACION DOCENTE</label>
-                                                <label className=' text-sm'>SALA PRIMARIA</label>
+                                                <label className=' text-sm'>SALA {nivelSG === 1 ? 'INICIAL' : 'PRIMARIA'}</label>
                                             </div>
                                         </div>
                                     </div>
